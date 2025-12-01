@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Unauthorized";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // or remove if no layout
+}
+
+<div class="alert alert-danger mt-4">
+    <h3>Access Denied</h3>
+    <p>You are not authorized to perform this operation.</p>
+</div>
+
+<a href="@Url.Action("Index","Employees")" class="btn btn-primary">Back to Home</a>
