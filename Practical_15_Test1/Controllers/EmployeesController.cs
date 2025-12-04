@@ -10,18 +10,17 @@ using Practical_15_Test1.Models;
 
 namespace Practical_15_Test1.Controllers
 {
-    [Authorize]
     public class EmployeesController : Controller
     {
         private EmployeeDBContext db = new EmployeeDBContext();
 
-        // GET: Employees
+        [Authorize(Roles = @"SIMFORM\trupal.kalia")]
         public ActionResult Index()
         {
             return View(db.Employees.ToList());
         }
 
-        // GET: Employees/Details/5
+        [Authorize(Roles = @"SIMFORM\trupal.kalia")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,15 +35,13 @@ namespace Practical_15_Test1.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Create
+        [Authorize(Roles = @"SIMFORM\admin")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = @"SIMFORM\admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Designation,Salary")] Employee employee)
@@ -59,7 +56,7 @@ namespace Practical_15_Test1.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Edit/5
+        [Authorize(Roles = @"SIMFORM\admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,9 +71,7 @@ namespace Practical_15_Test1.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = @"SIMFORM\admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Designation,Salary")] Employee employee)
@@ -90,7 +85,7 @@ namespace Practical_15_Test1.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
+        [Authorize(Roles = @"SIMFORM\admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,7 +100,7 @@ namespace Practical_15_Test1.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
+        [Authorize(Roles = @"SIMFORM\admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -2,46 +2,73 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Employee Portal</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Employee Portal", "Index", "Employees", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse ">
-                <ul class="nav navbar-nav">
+
+            <!-- Branding -->
+            <a class="navbar-brand" href="@Url.Action("Index", "Employees")">
+                Employee Portal
+            </a>
+
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav ms-auto">
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Get Employee List", "Index", "Employees")</li>
-                        <li>@Html.ActionLink("Add Employee", "Create", "Employees")</li>
-                        <li><a>Hello - @User.Identity.Name</a></li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
+                        <!-- Hello message -->
+                        <li class="nav-item">
+                            <span class="navbar-text me-3">
+                                Hello, <strong>@User.Identity.Name</strong>
+                            </span>
+                        </li>
+
+                        <!-- Logout button -->
+                        <li class="nav-item">
+                            <a href="@Url.Action("Logout", "Accounts")" class="btn btn-danger btn-sm">
+                                Logout
+                            </a>
+                        </li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
+                        <!-- Login button -->
+                        <li class="nav-item">
+                            <a href="@Url.Action("Login", "Accounts")" class="btn btn-success btn-sm">
+                                Login
+                            </a>
+                        </li>
                     }
+
                 </ul>
             </div>
+
         </div>
-    </div>
+    </nav>
 
-    <div class="container body-content">
+    <!-- offset so content doesn't hide under navbar -->
+    <div class="container" style="margin-top: 80px;">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

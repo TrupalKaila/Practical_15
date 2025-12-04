@@ -32,24 +32,7 @@ namespace Practical_15Test2.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
 
-        public ActionResult Signup()
-        {
-            return View();
-        }
-        [HttpPost]
-        [AllowAnonymous]
-
-        public ActionResult Signup(User model)
-        {
-            using (EmployeeDBContext context = new EmployeeDBContext())
-            {
-                context.Users.Add(model);
-                context.SaveChanges();
-            }
-            return RedirectToAction("Login");
-        }
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
